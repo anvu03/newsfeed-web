@@ -1,0 +1,13 @@
+<div class="card mb-2" *ngFor="let item of articles; index as index">
+    <div class="card-body">
+        <h5 class="card-title">
+            <a href="{{ item.url }}">{{ index + 1 }}. {{ item.title }}</a>
+        </h5>
+        <small>{{ getTimeSpanFromUnixTimestamp(item.creationDateUnix) }} by <b>{{ item.author }}</b></small>
+    </div>
+</div>
+<div class="" style="position: absolute; top: 50vh; left: 50vw" *ngIf="loading">
+    <div class="spinner-border" role="status">
+        <span class="sr-only mx-auto">Loading...</span>
+    </div>
+</div>
