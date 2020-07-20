@@ -1,15 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewsfeedComponent } from './newsfeed.component';
-import { HttpClient } from '@angular/common/http';
+import { NewsfeedService } from '../newsfeed.service';
+import { Article } from '../../domain/article';
+import { Observable } from 'rxjs';
 
 describe('NewsfeedComponent', () => {
   let component: NewsfeedComponent;
   let fixture: ComponentFixture<NewsfeedComponent>;
 
+  let newsfeedServiceStub: Partial<NewsfeedService>;
+  newsfeedServiceStub = {
+    getLatestArticles(count: number = 0, lastArticleId: number = 0) {
+      let resolve = new Array<Article>();
+      return new Observable((observer) => {});
+    },
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NewsfeedComponent, HttpClient],
+      declarations: [NewsfeedComponent],
+      providers: [{ provide: NewsfeedService, useValue: newsfeedServiceStub }],
     }).compileComponents();
   }));
 
@@ -21,13 +32,5 @@ describe('NewsfeedComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('articles should be defined', () => {
-    expect(component.latestsArticles).toBeDefined();
-  });
-
-  it('articles should be empty', () => {
-    expect(component.latestsArticles.length).toEqual(0);
   });
 });

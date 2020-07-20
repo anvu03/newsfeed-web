@@ -9,10 +9,7 @@ import { Observable } from 'rxjs';
 export class NewsfeedService {
   constructor(private http: HttpClient) {}
 
-  getLatestArticles(
-    count: number = 0,
-    lastArticleId: number = 0
-  ): Observable<Array<Article>> {
+  getLatestArticles(count: number = 0, lastArticleId: number = 0) {
     if (lastArticleId <= 0)
       return this.http.get<Array<Article>>(
         `http://localhost:5000/api/newsfeed/?count=${count}`

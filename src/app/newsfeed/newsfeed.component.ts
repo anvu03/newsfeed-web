@@ -8,14 +8,15 @@ import { Article } from '../../domain/article';
   styleUrls: ['./newsfeed.component.css'],
 })
 export class NewsfeedComponent implements OnInit {
-  articles: Array<Article>;
-  loading = false;
-  searchModeOn = false;
+  articles: Array<Article> = [];
+  loading: Boolean = true;
+  searchModeOn: Boolean = false;
 
   constructor(private newsfeedService: NewsfeedService) {}
 
-  ngOnInit(): void {
-    this.loading = true;
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
     this.newsfeedService.getLatestArticles(20).subscribe((articles) => {
       this.articles = articles;
       this.loading = false;
