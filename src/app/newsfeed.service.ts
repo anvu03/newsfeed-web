@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Article } from '../domain/article';
 import { Observable } from 'rxjs';
 
+const hostUrl = 'http://localhost:5000/api/';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,16 +14,16 @@ export class NewsfeedService {
   getLatestArticles(count: number = 0, lastArticleId: number = 0) {
     if (lastArticleId <= 0)
       return this.http.get<Array<Article>>(
-        `http://localhost:5000/api/newsfeed/?count=${count}`
+        `${hostUrl}newsfeed/?count=${count}`
       );
     return this.http.get<Array<Article>>(
-      `http://localhost:5000/api/newsfeed/?count=${count}&lowestArticleId=${lastArticleId}`
+      `${hostUrl}newsfeed/?count=${count}&lowestArticleId=${lastArticleId}`
     );
   }
 
   searchArticles(searchKeyword: string) {
     return this.http.get<Array<Article>>(
-      `http://localhost:5000/api/newsfeed/search?title=${searchKeyword}`
+      `${hostUrl}newsfeed/search?title=${searchKeyword}`
     );
   }
 }
